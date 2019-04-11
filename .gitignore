@@ -1,0 +1,39 @@
+ssh/id_ed25519
+ssh/id_ed25519.pub
+
+# Created by https://www.gitignore.io/api/ansible,vagrant,vim
+# Edit at https://www.gitignore.io/?templates=ansible,vagrant,vim
+
+### Ansible ###
+*.retry
+
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.logs
+
+### Vagrant Patch ###
+*.box
+
+### Vim ###
+# Swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Session
+Session.vim
+
+# Temporary
+.netrwhist
+*~
+# Auto-generated tag files
+tags
+# Persistent undo
+[._]*.un~
+
+# End of https://www.gitignore.io/api/ansible,vagrant,vim

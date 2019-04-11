@@ -1,0 +1,2 @@
+Host node*
+  StrictHostKeyChecking=no

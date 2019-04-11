@@ -1,0 +1,48 @@
+---
+- name: add apt key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: add apt repository
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu {{ ubuntu_version }} stable
+    state: present
+    update_cache: yes
+
+- name: install docker-ce
+  apt:
+    name: ["docker-ce", "docker-ce-cli", "containerd.io"]
+    state: present
+
+- name: stop dockerd
+  systemd:
+    name: docker.service
+    state: stopped
+
+- file:
+    path: /etc/systemd/system/docker.service.d
+    state: directory
+
+- name: enable overlay network
+  template:
+    src: docker.conf.j2
+    dest: /etc/systemd/system/docker.service.d/override.conf
+  register: install_conf
+
+- name: daemon-reload
+  systemd: daemon_reload=yes
+  when: install_conf.changed
+
+- name: start dockerd
+  systemd:
+    name: docker.service
+    state: started
+    enabled: true
+
+- name: add user '{{ item }}' to group docker
+  user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  with_items: "{{ users }}"

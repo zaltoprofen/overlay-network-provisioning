@@ -1,0 +1,6 @@
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H fd:// \
+    --containerd=/run/containerd/containerd.sock \
+    --cluster-store=etcd://{{ip[inventory_hostname]}}:2379 \
+    --cluster-advertise={{ip[inventory_hostname]}}:2376

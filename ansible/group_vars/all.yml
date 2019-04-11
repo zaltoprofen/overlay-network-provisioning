@@ -1,0 +1,8 @@
+---
+ubuntu_version: xenial
+users:
+  - vagrant
+
+ip:
+  node1: 92.9.9.2
+  node2: 92.9.9.3
